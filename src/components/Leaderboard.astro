@@ -61,7 +61,7 @@ const { data } = Astro.props;
                         </th>
                         <th class="w-[200px]">
                             <div class="flex items-center justify-center p-4">
-                                <Image src={FACEIT_LEVEL_LOGOS[entry.game_skill_level]} alt={`Level ${entry.game_skill_level}`} class="w-7 h-7" />
+                                <Image src={FACEIT_LEVEL_LOGOS[entry.game_skill_level].src} alt={`Level ${entry.game_skill_level}`} height={28} width={28} />
                             </div>
                         </th>
                     </tr>

@@ -1,0 +1,54 @@
+---
+interface Props {
+    title: string;
+    subtitle: string;
+    buttons: {
+        text: string;
+        link: string;
+    }[];
+}
+
+let { title, subtitle, buttons = [] } = Astro.props;
+
+let titleWords = title.split(' ');
+let titleColoredWords;
+
+if (titleWords.length >= 4) {
+    titleColoredWords = titleWords.slice(-2);
+    titleWords = titleWords.slice(0, -2);
+} else {
+    titleColoredWords = titleWords.slice(-1);
+    titleWords = titleWords.slice(0, -1);
+}
+---
+
+<section class="flex flex-col gap-4 container mx-auto py-20">
+    {title && 
+        <h1 
+            class="text-7xl text-balance text-center"
+        >
+            {titleWords.join(' ')} 
+            <span 
+                class="text-purple font-extrabold"
+            >
+                {titleColoredWords.join(' ')}
+            </span>
+        </h1>
+    }
+    {subtitle && <h2 class="text-xl text-balance text-center py-7">{subtitle}</h2>}
+
+    {
+        buttons.length && (
+            <div class="hero-buttons mx-auto">
+                {buttons.map((button) => (
+                    <a 
+                        href={button.link} 
+                        class="button border border-lime py-4 px-4 mr-4 last:mr-0"
+                    >
+                        {button.text}
+                    </a>
+                ))}
+            </div>
+        )
+    }
+</section>

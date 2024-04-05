@@ -39,11 +39,11 @@ if (titleWords.length >= 4) {
 
     {
         buttons.length && (
-            <div class="hero-buttons mx-auto">
+            <div class="flex flex-wrap items-center justify-center mx-auto gap-4">
                 {buttons.map((button) => (
                     <a 
                         href={button.link} 
-                        class="button border border-lime py-4 px-4 mr-4 last:mr-0"
+                        class="button border border-lime py-4 px-4"
                     >
                         {button.text}
                     </a>

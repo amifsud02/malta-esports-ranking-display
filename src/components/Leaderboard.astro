@@ -1,11 +1,10 @@
 ---
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import { FACEIT_LEVEL_LOGOS } from '../utils/faceit-level-logo-mapper';
 
 interface Props {
     data: LeaderboardEntry[];
 }
-
 interface LeaderboardEntry {
     playerId: string;
     nickname: string;
@@ -13,13 +12,16 @@ interface LeaderboardEntry {
     position: number;
     faceit_elo: number;
     game_skill_level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+    createdAt: Date;
+    updatedAt: Date | null;
+    deletedAt: Date | null;
 }
 
 const { data } = Astro.props;
 ---
 
-<section class="container py-20 mx-auto">
-    <table class="table w-full">
+<section class="container py-20 mx-auto overflow-x-scroll">
+    <table class="table w-full ">
         <thead>
             <tr class="border-b-2">
                 <th class="w-[120px]">
@@ -61,7 +63,12 @@ const { data } = Astro.props;
                         </th>
                         <th class="w-[200px]">
                             <div class="flex items-center justify-center p-4">
-                                <Image src={FACEIT_LEVEL_LOGOS[entry.game_skill_level].src} alt={`Level ${entry.game_skill_level}`} height={28} width={28} />
+                                <Picture 
+                                    src={FACEIT_LEVEL_LOGOS[entry.game_skill_level]} 
+                                    alt={`Level ${entry.game_skill_level}`} 
+                                    height={28} 
+                                    width={28}
+                                />
                             </div>
                         </th>
                     </tr>

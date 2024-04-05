@@ -2,6 +2,7 @@
 import Hero from "../components/Hero.astro";
 import Leaderboard from "../components/Leaderboard.astro";
 import Layout from "../layouts/Layout.astro";
+import { GET as getLeaderboard } from './api/update-leaderboard';
 
 const heroButtons = [
 	{
@@ -13,6 +14,11 @@ const heroButtons = [
 		link: "#leaderboard",
 	},
 ];
+
+let reponse = await getLeaderboard();
+const { items }  = await reponse.json();
+
+console.log(items);
 ---
 
 <Layout title="Malta Esports Ranking Display">
@@ -22,7 +28,7 @@ const heroButtons = [
 			subtitle="A simple ranking display for the Maltese esports scene"
 			buttons={heroButtons}
 		/>
-		<Leaderboard id="leaderboard"/>
+		<Leaderboard data={items}/>
 	</main>
 </Layout>
 

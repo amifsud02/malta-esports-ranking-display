@@ -1,12 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import { FACEIT_LEVEL_LOGOS } from '../utils/faceit-level-logo-mapper';
+
+interface Props {
+    data: LeaderboardEntry[];
+}
+
+interface LeaderboardEntry {
+    playerId: string;
+    nickname: string;
+    country: string;
+    position: number;
+    faceit_elo: number;
+    game_skill_level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+}
+
+const { data } = Astro.props;
+---
+
 <section class="container py-20 mx-auto">
     <table class="table w-full">
         <thead>
             <tr class="border-b-2">
                 <th class="w-[120px]">
-                    <div class="flex items-center justify-center p-4">Position</div>
+                    <div class="flex items-center justify-center p-4">
+                        Position
+                    </div>
                 </th>
                 <th>
-                    <div class="flex items-center justify-center p-4">Username</div>
+                    <div class="flex items-center justify-start p-4">
+                        Username
+                    </div>
                 </th>
                 <th class="w-[200px]">
                     <div class="flex items-center justify-center p-4">Elo</div>
@@ -17,20 +41,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th class="w-[120px]">
-                    <div class="flex items-center justify-center p-4">1</div>
-                </th>
-                <th>
-                    <div class="flex items-center justify-center p-4">Skull3d</div>
-                </th>
-                <th class="w-[200px]">
-                    <div class="flex items-center justify-center p-4">1234</div>
-                </th>
-                <th class="w-[200px]">
-                    <div class="flex items-center justify-center p-4">image</div>
-                </th>
-            </tr>
+            {
+                data.map((entry: LeaderboardEntry) => (
+                    <tr>
+                        <th class="w-[120px]">
+                            <div class="flex items-center justify-center p-4">
+                                {entry.position}
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex items-center justify-start p-4">
+                                {entry.nickname}
+                            </div>
+                        </th>
+                        <th class="w-[200px]">
+                            <div class="flex items-center justify-center p-4">
+                                {entry.faceit_elo}
+                            </div>
+                        </th>
+                        <th class="w-[200px]">
+                            <div class="flex items-center justify-center p-4">
+                                <Image src={FACEIT_LEVEL_LOGOS[entry.game_skill_level]} alt={`Level ${entry.game_skill_level}`} class="w-7 h-7" />
+                            </div>
+                        </th>
+                    </tr>
+                ))
+            }
         </tbody>
     </table>
 </section>

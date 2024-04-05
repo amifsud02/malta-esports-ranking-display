@@ -14,7 +14,7 @@ export default {
 			'lime': '#D0FE26',
 			'black': '#040404',
 			'purple': '#BB01FF',
-		}
+		},	
 	},
 	plugins: [],
 }

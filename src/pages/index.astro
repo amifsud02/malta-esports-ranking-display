@@ -15,9 +15,12 @@ const heroButtons = [
 	},
 ];
 
-let reponse = await getLeaderboard();
-const { items }  = await reponse.json();
+// let reponse = await getLeaderboard();
+// const { items }  = await reponse.json();
 
+import { db, CS2Leaderboard } from 'astro:db';
+
+const items = await db.select().from(CS2Leaderboard);
 ---
 
 <Layout title="Malta Esports Ranking Display">

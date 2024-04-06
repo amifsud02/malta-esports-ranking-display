@@ -1,17 +1,19 @@
 ---
 import { Picture } from 'astro:assets';
 import { FACEIT_LEVEL_LOGOS } from '../utils/faceit-level-logo-mapper';
+import { LEADERBOARD_MOVEMENTS } from '../utils/leaderboard-movement-mapper';
 
 interface Props {
     data: LeaderboardEntry[];
 }
 interface LeaderboardEntry {
-    playerId: string;
+    id: string;
     nickname: string;
-    country: string;
+    profileLink: string;
     position: number;
     faceit_elo: number;
-    game_skill_level: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+    game_skill_level: number;
+    movement: number;
     createdAt: Date;
     updatedAt: Date | null;
     deletedAt: Date | null;
@@ -20,7 +22,7 @@ interface LeaderboardEntry {
 const { data } = Astro.props;
 ---
 
-<section class="container py-20 mx-auto overflow-x-scroll">
+<section class="container py-20 mx-auto overflow-x-scroll" id="leaderboard">
     <table class="table w-full ">
         <thead>
             <tr class="border-b-2">
@@ -48,12 +50,12 @@ const { data } = Astro.props;
                     <tr>
                         <th class="w-[120px]">
                             <div class="flex items-center justify-center p-4">
-                                {entry.position}
+                                <img class="-ml-3 pr-1" src={LEADERBOARD_MOVEMENTS[entry.movement]}/> <span>{entry.position}</span>
                             </div>
                         </th>
                         <th>
                             <div class="flex items-center justify-start p-4">
-                                {entry.nickname}
+                                <a href={entry.profileLink} target="_blank" class="hover:text-lime hover:transition-all transition-all">{entry.nickname}</a>
                             </div>
                         </th>
                         <th class="w-[200px]">

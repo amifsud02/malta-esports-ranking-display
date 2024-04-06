@@ -20,12 +20,10 @@ const CS2Leaderboard = defineTable({
   indexes: {
     user_idx: { on: ["id"], unique: true }
   },
-
-  
 })
 
 export default defineDb({
   tables: {
-    CS2Leaderboard
+    CS2Leaderboard,
   }
 });
